@@ -6,7 +6,7 @@ import Link from "next/link";
 const getPosts = async (): Promise<AllPosts> => {
   const posts = await prisma.post.findMany({
     where: { published: true },
-    orderBy:{id:'desc'},
+    orderBy: { id: "desc" },
     include: {
       author: {
         select: { name: true },
@@ -35,8 +35,11 @@ export default async function Home() {
       >
         Add Post
       </Link>
-      {!posts.length && <h1 className="text-2xl text-emerald-500 font-semibold p-2">Nothing posted yet!</h1>
-      }
+      {!posts.length && (
+        <h1 className="text-2xl text-emerald-500 font-semibold p-2">
+          Nothing posted yet!
+        </h1>
+      )}
       {posts.map((post) => (
         <Posts
           key={post.id}
